@@ -1,0 +1,19 @@
+    
+    override func main() {
+        guard !(dependencies.first?.isCancelled ?? true),
+              let input = dependencies
+            .compactMap({ $0 as? Dependency })
+            .first?
+            .output else {
+            output = "step1 was canceled"
+            return
+        }
+        sleep(2)
+        guard !isCancelled else {
+            output = input + " step2 cancel"
+            return
+        }
+        output = input + " step2 ready"
+    }
+}
+
